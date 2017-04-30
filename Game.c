@@ -476,7 +476,7 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
 
 int print_board(struct Game *this) {
 //    int board[8][8] = this->board->board;
-    for (int row = 0; row < 8; row++) {
+    for (int row = 7; row >= 0; row--) {
         for (int col = 0; col < 8; col++)
             printf("%s\t\t", names[this->board->board[row][col] / 10]);
         printf("\n");
