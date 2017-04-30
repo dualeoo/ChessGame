@@ -1,7 +1,12 @@
-//
-// Created by dualeoo on 30/4/17.
-//
-struct String {
-    char *string;
-};
+#include <string.h>
+#include <stdlib.h>
+#include "String.h"
+
+struct String *StringIni(char *string_p) {
+    size_t size = strlen(string_p);
+    struct String *string = malloc(sizeof(struct String));
+    string->string = calloc(size + 1, sizeof(char));
+    strncpy(string->string, string_p, size);
+    return string;
+}
 

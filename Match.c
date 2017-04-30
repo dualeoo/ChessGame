@@ -1,8 +1,10 @@
-//
-// Created by dualeoo on 30/4/17.
-//
+#include <stdlib.h>
+#include "Match.h"
 
-struct Match {
-    struct Game game;
-    struct Player player;
-};
+struct Match *MatchIni(struct Game *game, struct Player *player) {
+    struct Match *match = malloc(sizeof(struct Match *));
+    match->game = game;
+    match->player = player;
+    return match;
+}
+
