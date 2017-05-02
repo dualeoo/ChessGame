@@ -7,6 +7,7 @@ struct String *StringIni(char *string_p) {
     struct String *string = malloc(sizeof(struct String));
     string->string = calloc(size + 1, sizeof(char));
     strncpy(string->string, string_p, size);
+    string->size = size;
     return string;
 }
 

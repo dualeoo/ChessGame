@@ -3,8 +3,9 @@
 #include "Game.h"
 #include "Board.h"
 
-char *names[] = {"____", "Pawn", "Knight", "Rook", "Bishop", "Queen", "King"};
-char reps[] = ".pkrbqK";
+char *names[] = {"____", "Pawn", "Rook", "Knight", "Bishop", "Queen", "King"};
+char reps[] = ".prkbqK";
+
 
 int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
     /** If trying to move to its own place **/
@@ -476,9 +477,16 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
 
 int print_board(struct Game *this) {
 //    int board[8][8] = this->board->board;
-    for (int row = 7; row >= 0; row--) {
-        for (int col = 0; col < 8; col++)
-            printf("%s\t\t", names[this->board->board[row][col] / 10]);
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            printf("%s", names[this->board->board[row][col] / 10]);
+            if (this->board->board[row][col] != 0) {
+                printf("\t- p%d", this->board->board[row][col] % 10 == 0 ? 1 : 2);
+            } else {
+                printf("\t\t");
+            }
+            printf("\t\t");
+        }
         printf("\n");
 //        fflush(stdout);
     }
@@ -490,7 +498,9 @@ struct Game *GameIni() {
 //    TOFREE
 
     game->time_elapsed = 0;
+    game->found_winner = 0;
     game->board = BoardIni();
+    game->turn = 0;
     game->check_legal_fp = &check_legal;
     game->print_board_fp = &print_board;
     return game;

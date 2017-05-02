@@ -6,6 +6,7 @@
 
 struct String {
     char *string;
+    size_t size;
 };
 
 struct String *StringIni(char *);
