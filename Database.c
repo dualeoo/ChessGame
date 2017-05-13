@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include "Database.h"
+#include "Helper.h"
 
 #define SIZE 100
 //TODO: implement data strucutre using TreeSet and HashSet instead of array like now
@@ -17,21 +18,25 @@ struct Database *DatabaseIni() {
     database->addMatch = &addMatch;
     database->addGame = &addGame;
     database->addPlayer = &addPlayer;
+    database->next_match_i = 0;
+    database->next_game_i = 0;
+    database->next_AI_i = 0;
+    database->next_player_i = 0;
     return database;
 }
 
-//TODO implement add methods
+//TODOX implement add methods
 int addMatch(struct Database *this, struct Match *match) {
     this->matches[this->next_match_i++] = match;
-    return 0;
+    return SUCCESS;
 }
 
 int addPlayer(struct Database *this, struct Player *player) {
     this->players[this->next_player_i++] = player;
-    return 0;
+    return SUCCESS;
 }
 
 int addGame(struct Database *this, struct Game *game) {
     this->games[this->next_game_i++] = game;
-    return 0;
+    return SUCCESS;
 }

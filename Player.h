@@ -6,30 +6,18 @@
 
 #include <time.h>
 #include "String.h"
+#include "AI.h"
 
 struct Player {
     struct String *name;
 //    time_t date;
     char sex;
     int score;
-
-    void (*move)(int, int, int, int);
-
-    void (*win)();
-
-    void (*save)();
-
-    void (*load)();
+    struct AI *ai;
 };
 
-void move(int old_pos_x, int old_pos_y, int new_pos_x, int new_pos_y);
-
-void win();
-
-void save();
-
-void load();
-
 struct Player *PlayerIni(struct String *name, char sex);
+
+//struct Player *PlayerAIIni(struct String *name, char sex, struct AI * ai);
 
 #endif

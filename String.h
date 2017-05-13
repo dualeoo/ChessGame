@@ -5,8 +5,9 @@
 #define CHESS_STRING_H
 
 struct String {
-    char *string;
     size_t size;
+    char string[1];
+
 };
 
 struct String *StringIni(char *);

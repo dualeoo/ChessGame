@@ -13,6 +13,7 @@ struct Database {
     int next_match_i;
     int next_player_i;
     int next_game_i;
+    int next_AI_i;
     struct Match **matches;
     struct Player **players;
     struct Game **games;

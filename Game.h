@@ -2,7 +2,8 @@
 #define CHESS_GAME_H
 
 #include <time.h>
-
+#include "Board.h"
+#include "Game.h"
 /*
  * p1/p2 Pawn = 10/11
  * p1/p2 Rook = 20/22
@@ -21,6 +22,8 @@ struct Game {
     int (*check_legal_fp)(struct Game *, int i, int j, int m, int n, int p);
 
     int (*print_board_fp)(struct Game *);
+
+    int (*pieceName)(int piece, char **name);
 };
 
 /***
@@ -33,6 +36,8 @@ struct Game {
 int check_legal(struct Game *this, int i, int j, int m, int n, int p);
 
 int print_board(struct Game *this);
+
+int pieceName(int piece, char **name);
 
 struct Game *GameIni();
 

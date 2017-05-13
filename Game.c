@@ -1,12 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Game.h"
-#include "Board.h"
+#include "Helper.h"
 
 char *names[] = {"____", "Pawn", "Rook", "Knight", "Bishop", "Queen", "King"};
-char reps[] = ".prkbqK";
+//char reps[] = ".prkbqK";
 
-
+/*
+ * NOTICE: the check-legal method is adapted (not merely copy) from Tuan as there are several rules which have not
+ * been coded corrently
+ * */
 int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
     /** If trying to move to its own place **/
     if ((this->board->board[i][j] == 0) || ((i == m) && (j == n)))
@@ -73,7 +76,7 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
             else
                 return 0;
 
-            // rook - both players
+            // rook - both player
         case 20:
         case 22:
 
@@ -83,7 +86,7 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
 
             /*******  vertical movement  *************/
             if (j == n) {
-                // Vertically moving upwards.
+                // Vertically moving downwards.
                 if (m > i) {
                     for (int a = i + 1; a < m; a++) {
                         // checking if path of rook is empty or not.
@@ -93,17 +96,19 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                     }
 
                     // if destination is empty or its occupied by opposite player chessmen
-                    if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
+                    if (this->board->board[m][n] == 0 || (p == 1 && this->board->board[m][n] % 10 != 0) ||
+                        (p == 2 && this->board->board[m][n] % 10 == 0))
                         return 1;
 
                 }
-                // Vertically moving downwards.
+                // Vertically moving upwards.
                 if (i > m) {
                     for (int a = i - 1; a > m; a--) {
                         if (this->board->board[a][n] != 0)
                             return 0;
                     }
-                    if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
+                    if (this->board->board[m][n] == 0 || (p == 1 && this->board->board[m][n] % 10 != 0) ||
+                        (p == 2 && this->board->board[m][n] % 10 == 0))
                         return 1;
 
                 }
@@ -120,7 +125,8 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                         }
                     }
 
-                    if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
+                    if (this->board->board[m][n] == 0 || (p == 1 && this->board->board[m][n] % 10 != 0) ||
+                        (p == 2 && this->board->board[m][n] % 10 == 0))
                         return 1;
                 }
 
@@ -130,7 +136,8 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                         if (this->board->board[m][a] != 0)
                             return 0;
                     }
-                    if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
+                    if (this->board->board[m][n] == 0 || (p == 1 && this->board->board[m][n] % 10 != 0) ||
+                        (p == 2 && this->board->board[m][n] % 10 == 0))
                         return 1;
 
                 }
@@ -376,7 +383,8 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                         }
                     }
 
-                    if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
+                    if (this->board->board[m][n] == 0 || (p == 1 && this->board->board[m][n] % 10 != 0) ||
+                        (p == 2 && this->board->board[m][n] % 10 == 0))
                         return 1;
 
                 }
@@ -385,13 +393,13 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                         if (this->board->board[a][n] != 0)
                             return 0;
                     }
-                    if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
+                    if (this->board->board[m][n] == 0 || (p == 1 && this->board->board[m][n] % 10 != 0) ||
+                        (p == 2 && this->board->board[m][n] % 10 == 0))
                         return 1;
 
                 }
 
-            } else  // for horizontal movement
-            if (i == m) {
+            } else if (i == m) {// for horizontal movement
                 if (j < n) {
                     for (int a = j + 1; a < n; a++) {
                         if (this->board->board[m][a] != 0) {
@@ -399,7 +407,8 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                         }
                     }
 
-                    if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
+                    if (this->board->board[m][n] == 0 || (p == 1 && this->board->board[m][n] % 10 != 0) ||
+                        (p == 2 && this->board->board[m][n] % 10 == 0))
                         return 1;
 
                 }
@@ -408,12 +417,14 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                         if (this->board->board[m][a] != 0)
                             return 0;
                     }
-                    if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
+                    if (this->board->board[m][n] == 0 || (p == 1 && this->board->board[m][n] % 10 != 0) ||
+                        (p == 2 && this->board->board[m][n] % 10 == 0))
                         return 1;
 
                 }
-
             }
+
+
                 // camel code
             else if ((i - m) == (j - n) || (m - i) == (j - n)) {
                 if (m > i) {
@@ -424,10 +435,10 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                             if (this->board->board[u++][v++] != 0)
                                 return 0;
                         }
-                        if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
-                            return 1;
-                        else
-                            return 0;
+//                        if (this->board->board[m][n] == 0 || (p%10 == 0 && this->board->board[m][n] % 10 != 0) || (p%10 != 0 && this->board->board[m][n] % 10 == 0))
+//                            return 1;
+//                        else
+//                            return 0;
 
                     } else {
 
@@ -437,6 +448,10 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                             if (this->board->board[u++][v--] != 0)
                                 return 0;
                         }
+//                        if (this->board->board[m][n] == 0 || (p%10 == 0 && this->board->board[m][n] % 10 != 0) || (p%10 != 0 && this->board->board[m][n] % 10 == 0))
+//                            return 1;
+//                        else
+//                            return 0;
                     }
                 } else  // i>m
                 {
@@ -456,11 +471,10 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
                                 return 0;
                         }
                     }
-
-
                 }
 
-                if (this->board->board[m][n] == 0 || this->board->board[m][n] % 10 != 0)
+                if (this->board->board[m][n] == 0 || (p == 1 && this->board->board[m][n] % 10 != 0) ||
+                    (p == 2 && this->board->board[m][n] % 10 == 0))
                     return 1;
                 else
                     return 0;
@@ -477,7 +491,9 @@ int check_legal(struct Game *this, int i, int j, int m, int n, int p) {
 
 int print_board(struct Game *this) {
 //    int board[8][8] = this->board->board;
+    printf("\n");
     for (int row = 0; row < 8; row++) {
+        printf("%d\t", 8 - row);
         for (int col = 0; col < 8; col++) {
             printf("%s", names[this->board->board[row][col] / 10]);
             if (this->board->board[row][col] != 0) {
@@ -488,9 +504,11 @@ int print_board(struct Game *this) {
             printf("\t\t");
         }
         printf("\n");
+
 //        fflush(stdout);
     }
-    return 0;
+    printf("\tA\t\t\t\t\tB\t\t\t\t\tC\t\t\t\t\tD\t\t\t\t\tE\t\t\t\t\tF\t\t\t\t\tG\t\t\t\t\tH\t\t\t\t\n");
+    return SUCCESS;
 }
 
 struct Game *GameIni() {
@@ -503,5 +521,11 @@ struct Game *GameIni() {
     game->turn = 0;
     game->check_legal_fp = &check_legal;
     game->print_board_fp = &print_board;
+    game->pieceName = &pieceName;
     return game;
 };
+
+int pieceName(int piece, char **name) {
+    *name = names[piece / 10];
+    return SUCCESS;
+}
