@@ -9,17 +9,16 @@
 - The check-legal is adapted from Tuan (not merely copy)
 - Plans to make this an independent project and develop a more "intelligent" AI.
 ### 1.3 The board
-- The outline of the baord can be found in the file named "Board outline.png"
+- The outline of the board can be found in the general folder
 - Model using a two dimension array
 - Player 1 is below. Col is labeled from A to H and Row is labeled from 1 to 8.
 - Notice: The array, however, starts from index 0.
-### 1.4 Serialization
-## 2. What have been done?
-### 2.1 Use case
-### 2.2 Class
-### 2.3 Implement use case
-## 3. Code structure
-### 3.1 Classes
+### 1.4 Use case and implementation
+- The use cases can be found in the General folder
+- The following use cases have been implemented: Move piece, Play with AI, Play with friends, Win game
+### 1.5 Serialization
+## 2. Code structure
+### 2.1 Classes
 - AI
 - Board
 - Database
@@ -28,10 +27,10 @@
 - Piece: Not implement as class
 - Player
 - String
-### 3.2 Actual code
-- Chess
-- Helper
-## 4. Demonstration
-### 4.1 Player-player
-### 4.1 Player-AI
-## 5. QnA
+### 2.2 Actual code
+- Chess (main): ask to sign-up > create game > select playing mode
+- Helper: start the game > repeat until a winner is found or the game is quit
+## 3. Demonstration
+### 3.1 Player-player
+### 3.2 Player-AI
+## 4. QnA
