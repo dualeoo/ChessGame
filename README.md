@@ -16,7 +16,6 @@
 ### 1.4 Use case and implementation
 - The use cases can be found in the General folder
 - The following use cases have been implemented: Move piece, Play with AI, Play with friends, Win game
-### 1.5 Serialization
 ## 2. Code structure
 ### 2.1 Classes
 - AI
