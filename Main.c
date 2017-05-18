@@ -9,25 +9,14 @@
 
 int main(int argc, char *argv[])
 {
-//    new_game_set();
-//    print_board();
+
     printf("Welcome to Chess Version %d.%d\n",
            Chess_VERSION_MAJOR,
            Chess_VERSION_MINOR);
 
 //    FILE * database_f = fopen("database", "r");
     struct Database *database = DatabaseIni();
-//    if (database_f){
-////        printf("\nSuccess opening file!");
-//        fread(database, sizeof(struct Database), 1, database_f);
-//    } else {
-//        printf("\nDatabase file either not exist or fail to open!");
-//        database = DatabaseIni();
-//    }
-//    int close_success = fclose(database_f);
-//    if(close_success !=0) printf("\nFail to close file!");
 
-//    TOFREE
     struct Player *player_main = NULL;
 //    struct Player *player_second = NULL;
 
@@ -46,5 +35,6 @@ int main(int argc, char *argv[])
 //    size_t success = fwrite(database, sizeof(struct Database), 1, database_f);
 //    if(success ==1)printf("\nSuccess saving file!");
 //    else printf("\nFail saving file!");
+    free_database(database);
     return SUCCESS;
 }

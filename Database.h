@@ -8,8 +8,10 @@
 #include "Match.h"
 #include "Player.h"
 #include "Game.h"
+#include "ArrayList.h"
 
 struct Database {
+//    The goal of the next 4 fields is to record the next ID
     int next_match_i;
     int next_player_i;
     int next_game_i;
@@ -33,5 +35,7 @@ int addMatch(struct Database *this, struct Match *match);
 int addPlayer(struct Database *this, struct Player *);
 
 int addGame(struct Database *this, struct Game *);
+
+int free_database(struct Database *database);
 
 #endif //CHESS_DATABASE_H

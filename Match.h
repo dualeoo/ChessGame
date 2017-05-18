@@ -3,6 +3,7 @@
 
 #include "Game.h"
 #include "Player.h"
+#include "ArrayList.h"
 
 struct Match {
     struct Game *game;
@@ -10,5 +11,7 @@ struct Match {
 };
 
 struct Match *MatchIni(struct Game *, struct Player *);
+
+int free_match(struct Match *match, struct ArrayList *memory_which_has_been_free);
 
 #endif

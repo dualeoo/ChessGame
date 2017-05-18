@@ -3,7 +3,7 @@
 
 #include <time.h>
 #include "Board.h"
-#include "Game.h"
+#include "ArrayList.h"
 /*
  * p1/p2 Pawn = 10/11
  * p1/p2 Rook = 20/22
@@ -40,5 +40,7 @@ int print_board(struct Game *this);
 int pieceName(int piece, char **name);
 
 struct Game *GameIni();
+
+int free_game(struct Game *game, struct ArrayList *memory_which_has_been_free);
 
 #endif

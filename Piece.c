@@ -7,6 +7,7 @@
 
 struct Piece *Piece(int type, struct Player *player) {
     struct Piece *piece = malloc(sizeof(struct Piece));
+//    TOFREE
     piece->x = 0;
     piece->y = 0;
     piece->type = type;

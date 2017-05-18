@@ -1,3 +1,4 @@
 // the configured options and settings for Tutorial
+// The goal is to display the version of the game whenever the game start
 #define Chess_VERSION_MAJOR @Chess_VERSION_MAJOR@
 #define Chess_VERSION_MINOR @Chess_VERSION_MINOR@

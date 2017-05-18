@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Helper.h"
 
+
 char *names[] = {"____", "Pawn", "Rook", "Knight", "Bishop", "Queen", "King"};
 //char reps[] = ".prkbqK";
 
@@ -493,10 +494,13 @@ int print_board(struct Game *this) {
 //    int board[8][8] = this->board->board;
     printf("\n");
     for (int row = 0; row < 8; row++) {
+//        The goal is to print the row number
         printf("%d\t", 8 - row);
         for (int col = 0; col < 8; col++) {
+//            The goal is to identify the name of piece corresponding with board[row][col]
             printf("%s", names[this->board->board[row][col] / 10]);
             if (this->board->board[row][col] != 0) {
+//                The goal is to identify which player owns the piece
                 printf("\t- p%d", this->board->board[row][col] % 10 == 0 ? 1 : 2);
             } else {
                 printf("\t\t");
@@ -507,6 +511,7 @@ int print_board(struct Game *this) {
 
 //        fflush(stdout);
     }
+//    The goal is to print the col number
     printf("\tA\t\t\t\t\tB\t\t\t\t\tC\t\t\t\t\tD\t\t\t\t\tE\t\t\t\t\tF\t\t\t\t\tG\t\t\t\t\tH\t\t\t\t\n");
     return SUCCESS;
 }
@@ -527,5 +532,16 @@ struct Game *GameIni() {
 
 int pieceName(int piece, char **name) {
     *name = names[piece / 10];
+    return SUCCESS;
+}
+
+int free_game(struct Game *game, struct ArrayList *memory_which_has_been_free) {
+    char contain = 0;
+    memory_which_has_been_free->al_search(memory_which_has_been_free, game, &contain);
+    if (!contain) {
+        free_board(game->board, memory_which_has_been_free);
+        free(game);
+        memory_which_has_been_free->al_insert(memory_which_has_been_free, -1, game);
+    }
     return SUCCESS;
 }

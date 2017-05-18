@@ -7,6 +7,7 @@
 #include <time.h>
 #include "String.h"
 #include "AI.h"
+#include "ArrayList.h"
 
 struct Player {
     struct String *name;
@@ -19,5 +20,7 @@ struct Player {
 struct Player *PlayerIni(struct String *name, char sex);
 
 //struct Player *PlayerAIIni(struct String *name, char sex, struct AI * ai);
+
+int free_player(struct Player *player, struct ArrayList *memory_which_has_been_free);
 
 #endif
